@@ -1,16 +1,11 @@
-import { restaurants } from "../../materials/mock";
-import { RestaurantCard } from "./restaurant/RestaurantCard";
+import { restaurants } from '../../materials/mock';
+import { RestaurantsPage } from './restaurantsPage/RestaurantsPage';
+import { Layout } from './layout/layout';
 
 export const App = () => {
   return (
-    <div>
-      {restaurants.map((restaurant, index) => (
-        <RestaurantCard 
-          key={restaurant.id} 
-          restaurant={restaurant} 
-          index={index} 
-        />
-      ))}
-    </div>
+    <Layout>
+      <RestaurantsPage items={restaurants} />
+    </Layout>
   );
 };
