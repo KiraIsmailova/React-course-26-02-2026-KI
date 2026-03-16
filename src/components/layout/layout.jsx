@@ -1,9 +1,12 @@
+import { CustomFooter } from '../CustomFooter/CustomFooter';
+import { CustomHeader } from '../CustomHeader/CustomHeader';
+
 export const Layout = ({ children }) => {
   return (
     <div>
-      <header>This is header</header>
+      <CustomHeader />
       <main>{children}</main>
-      <footer>This is footer</footer>
+      <CustomFooter />
     </div>
   );
 };

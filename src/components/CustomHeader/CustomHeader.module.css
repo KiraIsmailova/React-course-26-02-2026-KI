@@ -1,0 +1,22 @@
+.custom-header {
+  padding: 30px 15px;
+  background-color: antiquewhite;
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header-list {
+  list-style-type: none;
+  display: flex;
+  gap: 30px;
+}

@@ -1,9 +1,6 @@
-import './counter.css';
-import { useCounter } from './useCounter';
+import './Counter.css';
 
-export const Counter = () => {
-  const { value, decrement, increment } = useCounter();
-
+export const Counter = ({ value, increment, decrement }) => {
   return (
     <div className="counter-wrapper">
       <button onClick={decrement}>-</button>
