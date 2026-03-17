@@ -2,10 +2,10 @@ import styles from './CustomFooter.module.css';
 
 export const CustomFooter = () => {
   return (
-    <footer className={styles['custom-footer']}>
-      <div className={styles['footer-inner']}>
-        <p className={styles['footer-logo']}>Hello!</p>
-        <ul className={styles['footer-list']}>
+    <footer className={styles['customFooter']}>
+      <div className={styles['footerInner']}>
+        <p className={styles['footerLogo']}>Hello!</p>
+        <ul className={styles['footerList']}>
           <li>item 1</li>
           <li>item 2</li>
           <li>item 3</li>

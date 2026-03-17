@@ -22,7 +22,22 @@ const reducer = (state, action) => {
     case SET_REVIEW_TEXT_ACTION:
       return { ...state, reviewText: payload };
     case SET_MARK_ACTION:
-      return { ...state, mark: payload };
+      if (payload === 'increment') {
+        if (state.mark >= 5) {
+          return state;
+        }
+        return { ...state, mark: state.mark + 1 };
+      }
+
+      if (payload === 'decrement') {
+        if (state.mark <= 0) {
+          return state;
+        }
+        return { ...state, mark: state.mark - 1 };
+      }
+
+      return state;
+
     case CLEAR_FORM_ACTION:
     default:
       return INITIAL_FORM;
@@ -35,10 +50,7 @@ export const ReviewForm = () => {
   const { userName, reviewText, mark } = form;
 
   return (
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      className={styles['review-form']}
-    >
+    <form onSubmit={(e) => e.preventDefault()} className={styles['reviewForm']}>
       <label htmlFor="userName">Имя</label>
       <input
         id="userName"
@@ -65,18 +77,10 @@ export const ReviewForm = () => {
       <Counter
         value={mark}
         increment={() => {
-          if (mark >= 5) return;
-          dispatch({
-            type: SET_MARK_ACTION,
-            payload: mark + 1,
-          });
+          dispatch({ type: SET_MARK_ACTION, payload: 'increment' });
         }}
         decrement={() => {
-          if (mark <= 1) return;
-          dispatch({
-            type: SET_MARK_ACTION,
-            payload: mark - 1,
-          });
+          dispatch({ type: SET_MARK_ACTION, payload: 'decrement' });
         }}
       />
 

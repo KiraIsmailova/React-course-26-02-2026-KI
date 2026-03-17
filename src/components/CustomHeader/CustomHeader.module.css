@@ -1,21 +1,21 @@
-.custom-header {
+.customHeader {
   padding: 30px 15px;
   background-color: antiquewhite;
 }
 
-.header-inner {
+.headerInner {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
 
-.header-logo {
+.headerLogo {
   font-size: 20px;
   font-weight: bold;
 }
 
-.header-list {
+.headerList {
   list-style-type: none;
   display: flex;
   gap: 30px;

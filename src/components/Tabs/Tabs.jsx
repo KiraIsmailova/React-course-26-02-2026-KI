@@ -15,20 +15,20 @@ export const Tabs = ({ items, renderContent }) => {
   const activeContent = items.find((item) => item.id === activeTabId);
 
   return (
-    <div className={styles['tabs-container']}>
-      <div className={styles['tabs-header']}>
+    <div className={styles['tabsContainer']}>
+      <div className={styles['tabsHeader']}>
         {items.map((tab) => (
           <button
             key={tab.id}
             onClick={() => handleClick(tab.id)}
-            className={`${styles['tab-button']} ${activeTabId === tab.id ? styles['active'] : ''}`}
+            className={`${styles['tabButton']} ${activeTabId === tab.id ? styles['active'] : ''}`}
           >
             {tab.name}
           </button>
         ))}
       </div>
-      <div className={styles['tabs-content']}>
-        <div className={styles['content-inner']}>
+      <div className={styles['tabsContent']}>
+        <div className={styles['contentInner']}>
           {activeContent && renderContent(activeContent)}
         </div>
       </div>

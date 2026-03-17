@@ -1,8 +1,8 @@
-.tabs-header {
+.tabsHeader {
   display: flex;
 }
 
-.tab-button {
+.tabButton {
   padding: 10px 20px;
   border: none;
   background: none;
@@ -14,10 +14,10 @@
 }
 
 .active {
-  color: #007bff;
-  border-bottom: 2px solid #007bff;
+  color: #817200;
+  border-bottom: 2px solid #817200;
 }
 
-.tabs-content {
+.tabsContent {
   padding: 10px;
 }
