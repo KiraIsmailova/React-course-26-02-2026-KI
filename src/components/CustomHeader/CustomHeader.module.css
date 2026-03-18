@@ -1,0 +1,22 @@
+.customHeader {
+  padding: 30px 15px;
+  background-color: antiquewhite;
+}
+
+.headerInner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerLogo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.headerList {
+  list-style-type: none;
+  display: flex;
+  gap: 30px;
+}

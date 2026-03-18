@@ -1,0 +1,23 @@
+.customFooter {
+  padding: 40px 10px;
+  background-color: rgb(240, 191, 126);
+}
+
+.footerLogo {
+  font-size: 18px;
+  font-weight: bold;
+  color: brown;
+}
+
+.footerInner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footerList {
+  list-style-type: none;
+  display: flex;
+  gap: 30px;
+}
