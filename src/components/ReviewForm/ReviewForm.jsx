@@ -1,6 +1,7 @@
 import { Counter } from '../counter/Counter';
 import { useReducer } from 'react';
 import styles from './ReviewForm.module.css';
+import { Button } from '../Button/Button';
 
 const INITIAL_FORM = {
   userName: '',
@@ -84,13 +85,13 @@ export const ReviewForm = () => {
         }}
       />
 
-      <button
+      <Button
         onClick={(event) => {
           dispatch({ type: CLEAR_FORM_ACTION, payload: event.target.value });
         }}
       >
         Сбросить
-      </button>
+      </Button>
     </form>
   );
 };

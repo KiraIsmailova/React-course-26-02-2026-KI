@@ -1,11 +1,12 @@
+import { Button } from '../Button/Button';
 import './Counter.css';
 
 export const Counter = ({ value, increment, decrement }) => {
   return (
     <div className="counterWrapper">
-      <button onClick={decrement}>-</button>
+      <Button onClick={decrement}>-</Button>
       <div>{value}</div>
-      <button onClick={increment}>+</button>
+      <Button onClick={increment}>+</Button>
     </div>
   );
 };

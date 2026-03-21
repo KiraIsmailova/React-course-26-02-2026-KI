@@ -1,0 +1,12 @@
+.button {
+  background-color: #f1a78f;
+  color: #2d0303;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.buttonDark {
+  background-color: #1b1a1a;
+  color: #e9d5d5;
+}
