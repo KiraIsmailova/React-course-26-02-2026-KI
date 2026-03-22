@@ -30,7 +30,7 @@ export const Restaurant = ({ restaurant }) => {
               <li key={itemReview.id}>{itemReview.text}</li>
             ))}
           </ul>
-          <ReviewForm />
+          <ReviewForm key={restaurant.reviews.id} />
         </div>
       ) : (
         <p>Отзывы скоро появятся</p>
