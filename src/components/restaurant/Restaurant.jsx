@@ -1,7 +1,11 @@
 import { DishCounter } from '../DishCounter/DishCounter';
 import { ReviewForm } from '../ReviewForm/ReviewForm';
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext/AuthContext';
 
 export const Restaurant = ({ restaurant }) => {
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <div>
       <h3>Меню:</h3>
@@ -10,7 +14,7 @@ export const Restaurant = ({ restaurant }) => {
           {restaurant.menu.map((itemMenu) => (
             <li key={itemMenu.id}>
               {itemMenu.name}
-              <DishCounter />
+              {isAuthenticated && <DishCounter />}
             </li>
           ))}
         </ul>
