@@ -1,6 +1,9 @@
+import styles from './PlaceholderText.module.css';
+
 export const PlaceholderText = () => {
   return (
-    <div>
+    <div className={styles['placeholderTextWrapper']}>
+      <h3 className={styles['placeholderTextTitle']}>Описание проекта</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
         blandit tortor sit amet libero suscipit tristique. Sed eu sagittis orci.

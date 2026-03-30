@@ -1,0 +1,16 @@
+.homePageWrapper {
+  padding: 30px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.homePageTitle {
+  color: #3f0202;
+}
+
+.homePageSubtitle {
+  color: #a0522d;
+  font-size: 18px;
+}
