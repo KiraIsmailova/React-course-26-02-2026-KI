@@ -1,6 +1,6 @@
 .customHeader {
   padding: 30px 15px;
-  background-color: antiquewhite;
+  background-color: #6b3703;
 }
 
 .headerInner {
@@ -8,11 +8,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-}
-
-.headerLogo {
-  font-size: 20px;
-  font-weight: bold;
 }
 
 .headerList {

@@ -1,8 +1,8 @@
 import { Counter } from '../counter/Counter';
-import { useCounter } from '../counter/useCounter';
+import { useCartCounter } from '../counter/useCartCounter';
 
-export const DishCounter = () => {
-  const { value, increment, decrement } = useCounter();
+export const DishCounter = ({ id }) => {
+  const { value, increment, decrement } = useCartCounter(id);
 
   return <Counter value={value} increment={increment} decrement={decrement} />;
 };

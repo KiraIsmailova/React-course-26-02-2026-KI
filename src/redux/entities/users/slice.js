@@ -19,7 +19,6 @@ export const selectUsersSlice = (state) => state[usersSlice.name];
 export const selectUsersById = (state, userId) => {
   const slice = selectUsersSlice(state);
 
-  // Защита от undefined
   if (!slice || !slice.entities) {
     return undefined;
   }

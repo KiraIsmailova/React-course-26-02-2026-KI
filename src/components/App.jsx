@@ -6,6 +6,7 @@ import { PlaceholderText } from './PlaceholderText/PlaceholderText';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 import { RestaurantList } from './restaurant/RestaurantList';
+import { Cart } from './Cart/Cart';
 
 export const App = () => {
   return (

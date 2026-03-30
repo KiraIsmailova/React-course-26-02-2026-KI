@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectAllRestaurants } from '../../redux/entities/restaurants/slice';
 import styles from '../Tabs/Tabs.module.css';
 import { Restaurant } from './restaurant';
+import { Cart } from '../Cart/Cart';
 
 export const RestaurantList = () => {
   const restaurants = useSelector(selectAllRestaurants);
@@ -33,6 +34,7 @@ export const RestaurantList = () => {
       <div className={styles['tabsContent']}>
         <div className={styles['contentInner']}>
           <Restaurant id={activeId} />
+          <Cart />
         </div>
       </div>
     </div>

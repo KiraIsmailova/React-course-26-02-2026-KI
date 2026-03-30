@@ -3,6 +3,7 @@ import { ReviewForm } from '../ReviewForm/ReviewForm';
 
 import { Dish } from '../Dish/Dish';
 import { Reviews } from '../Reviews/Reviews';
+import styles from './Restaurant.module.css';
 
 export const RestaurantChildComponent = ({ id, name, menu, reviews }) => {
   if (!name) {
@@ -10,7 +11,7 @@ export const RestaurantChildComponent = ({ id, name, menu, reviews }) => {
   }
 
   return (
-    <div>
+    <div className={styles['restaurantWrapper']}>
       <h3>Меню:</h3>
       {menu && menu.length > 0 ? (
         <ul>

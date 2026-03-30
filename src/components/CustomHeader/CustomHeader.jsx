@@ -9,18 +9,13 @@ export const CustomHeader = () => {
   return (
     <header className={styles['customHeader']}>
       <div className={styles['headerInner']}>
-        <p className={styles['headerLogo']}>It will be logo</p>
-
+        <div className={styles['headerLogo']}>
+          <img src="../../../public/main-logo.png" />
+        </div>
         <button onClick={toggleTheme} className={styles.toggleBtn}>
           {isDark ? '☀️ Переключить на светлую' : '🌙 Переключить на темную'}
         </button>
-        {/* tyt */}
         <AuthButton />
-        <ul className={styles['headerList']}>
-          <li>item 1</li>
-          <li>item 2</li>
-          <li>item 3</li>
-        </ul>
       </div>
     </header>
   );
