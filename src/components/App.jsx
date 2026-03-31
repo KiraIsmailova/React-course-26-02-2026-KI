@@ -6,6 +6,10 @@ import { store } from '../redux/store';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { RestaurantPage } from '../pages/RestaurantPage';
 import { HomePage } from '../pages/HomePage';
+import { RestaurantsDetailPage } from '../pages/RestaurantsDetailPage';
+import { RestaurantMenu } from '../pages/RestaurantMenu';
+import { RestaurantReview } from '../pages/RestaurantReview';
+import { DishDetail } from '../pages/DishDetail';
 
 export const App = () => {
   return (
@@ -15,8 +19,17 @@ export const App = () => {
           <BrowserRouter>
             <Routes>
               <Route element={<Layout />}>
-                <Route path="/" element={<HomePage />}></Route>
-                <Route path="restaurant" element={<RestaurantPage />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="restaurants" element={<RestaurantPage />} />
+                <Route
+                  path="/restaurants/:id"
+                  element={<RestaurantsDetailPage />}
+                >
+                  <Route index element={<RestaurantMenu />} />
+                  <Route path="menu" element={<RestaurantMenu />} />
+                  <Route path="reviews" element={<RestaurantReview />} />
+                </Route>
+                <Route path="/dish/:dishId" element={<DishDetail />} />
               </Route>
             </Routes>
           </BrowserRouter>

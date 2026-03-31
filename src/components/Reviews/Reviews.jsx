@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { selectReviewById } from '../../redux/reviews/slice';
 import { selectUsersById } from '../../redux/entities/users/slice';
+import styles from './Reviews.module.css';
 
 export const Reviews = ({ reviewId }) => {
   const review = useSelector((state) => selectReviewById(state, reviewId));
@@ -14,11 +15,11 @@ export const Reviews = ({ reviewId }) => {
 
   return (
     <div>
-      <div>
+      <div className={styles['reviewsUser']}>
         <li key={reviewId}>{user?.name}</li>
       </div>
-      <p>{review.text}</p>
-      <p>{review.rating}</p>
+      <p className={styles['reviewsUserText']}>{review.text}</p>
+      <p className={styles['reviewsUserMark']}>{review.rating}</p>
     </div>
   );
 };

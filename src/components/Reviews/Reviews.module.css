@@ -1,0 +1,20 @@
+.reviewsUser {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.reviewsUserText {
+  font-weight: 500;
+  font-size: 18px;
+  font-style: italic;
+  color: #760202;
+  margin-bottom: 12px;
+}
+
+.reviewsUserMark {
+  color: #ff0000;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
