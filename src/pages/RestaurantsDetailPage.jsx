@@ -27,8 +27,8 @@ export const RestaurantsDetailPage = () => {
       <Button onClick={() => navigate(`/restaurants/${id}/reviews`)}>
         Reviews
       </Button>
-      <div className={styles['restaurantDetailInner']}>
-        <div className={styles['detailContent']}>
+      <div className={styles.restaurantDetailInner}>
+        <div className={styles.detailContent}>
           <Outlet />
         </div>
         <Cart />

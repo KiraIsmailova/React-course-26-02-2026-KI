@@ -17,9 +17,9 @@ export const DishList = ({ dishId }) => {
   }
 
   return (
-    <div className={styles['dishWrapper']}>
+    <div className={styles.dishWrapper}>
       <li
-        className={styles['dishItem']}
+        className={styles.dishItem}
         key={dishId}
         onClick={() => navigate(`/dish/${dishId}`)}
       >

@@ -27,6 +27,6 @@ export const ProgressBar = () => {
   }, []);
 
   return (
-    <div className={styles['progressBar']} style={{ width: scrollWidth }}></div>
+    <div className={styles.progressBar} style={{ width: scrollWidth }}></div>
   );
 };

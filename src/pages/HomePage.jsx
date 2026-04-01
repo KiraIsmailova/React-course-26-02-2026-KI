@@ -13,9 +13,9 @@ export const HomePage = () => {
   return (
     <div>
       <ProgressBar />
-      <div className={styles['homePageWrapper']}>
-        <h1 className={styles['homePageTitle']}>Добро пожаловать!</h1>
-        <p className={styles['homePageSubtitle']}>
+      <div className={styles.homePageWrapper}>
+        <h1 className={styles.homePageTitle}>Добро пожаловать!</h1>
+        <p className={styles.homePageSubtitle}>
           Вы на главной странице сервиса по подбору ресторанов и блюд. Наш
           проект призван помочь вам выбирать самые лучшие рестораны и самые
           вкусные блюда

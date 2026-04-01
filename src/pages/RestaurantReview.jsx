@@ -10,8 +10,8 @@ export const RestaurantReview = () => {
   const restaurant = useSelector((state) => selectRestaurantById(state, id));
   return (
     <div>
-      <div className={styles['detailContentWrap']}>
-        <div className={styles['detailContent']}>
+      <div className={styles.detailContentWrap}>
+        <div className={styles.detailContent}>
           <ul>
             {restaurant.reviews.map((reviewId) => (
               <Reviews key={reviewId} reviewId={reviewId} />

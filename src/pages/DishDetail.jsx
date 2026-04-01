@@ -20,17 +20,17 @@ export const DishDetail = () => {
   const dish = useSelector((state) => selectDishesById(state, dishId));
 
   return (
-    <div className={styles['dishItemInner']}>
-      <div className={styles['dishDetailDescription']}>
+    <div className={styles.dishItemInner}>
+      <div className={styles.dishDetailDescription}>
         <Button onClick={handleGoBack}>Назад к ресторану</Button>
         <h3>Подробнее о блюде</h3>
-        <p className={styles['dishItem']} key={dishId}>
+        <p className={styles.dishItem} key={dishId}>
           Название - {dish.name}
         </p>
-        <p className={styles['dishPrice']}>Цена: {dish.price}$</p>
-        <p className={styles['dishCompoundTitle']}>Состав: </p>
+        <p className={styles.dishPrice}>Цена: {dish.price}$</p>
+        <p className={styles.dishCompoundTitle}>Состав: </p>
         {dish.ingredients.map((item) => (
-          <p className={styles['dishCompound']} key={item}>
+          <p className={styles.dishCompound} key={item}>
             {item}
           </p>
         ))}

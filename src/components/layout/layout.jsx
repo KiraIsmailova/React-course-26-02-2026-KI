@@ -7,7 +7,7 @@ export const Layout = () => {
   return (
     <div>
       <CustomHeader />
-      <main className={styles['customMain']}>
+      <main className={styles.customMain}>
         <Outlet />
       </main>
       <CustomFooter />

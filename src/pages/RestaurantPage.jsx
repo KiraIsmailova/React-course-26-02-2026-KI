@@ -13,8 +13,8 @@ export const RestaurantPage = () => {
   }
 
   return (
-    <div className={styles['tabsContainer']}>
-      <div className={styles['tabsHeader']}>
+    <div className={styles.tabsContainer}>
+      <div className={styles.tabsHeader}>
         {restaurants.map((restaurant) => (
           <Button
             key={restaurant.id}
@@ -24,8 +24,8 @@ export const RestaurantPage = () => {
           </Button>
         ))}
       </div>
-      <div className={styles['tabsContent']}>
-        <p className={styles['tabsDescription']}>
+      <div className={styles.tabsContent}>
+        <p className={styles.tabsDescription}>
           Выберите ресторан, чтобы посмотреть меню и отзывы
         </p>
       </div>

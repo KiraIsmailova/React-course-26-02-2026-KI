@@ -15,11 +15,11 @@ export const Reviews = ({ reviewId }) => {
 
   return (
     <div>
-      <div className={styles['reviewsUser']}>
+      <div className={styles.reviewsUser}>
         <li key={reviewId}>{user?.name}</li>
       </div>
-      <p className={styles['reviewsUserText']}>{review.text}</p>
-      <p className={styles['reviewsUserMark']}>{review.rating}</p>
+      <p className={styles.reviewsUserText}>{review.text}</p>
+      <p className={styles.reviewsUserMark}>{review.rating}</p>
     </div>
   );
 };
