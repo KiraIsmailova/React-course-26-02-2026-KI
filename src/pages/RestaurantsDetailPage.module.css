@@ -1,0 +1,14 @@
+.detailContentWrap {
+  display: flex;
+  gap: 24px;
+}
+
+.detailContent {
+  min-width: 350px;
+}
+
+.restaurantDetailInner {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}

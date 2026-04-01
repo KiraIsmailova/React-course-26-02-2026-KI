@@ -1,0 +1,18 @@
+.placeholderTextWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.placeholderTextWrapper p {
+  color: #a0522d;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.placeholderTextTitle {
+  margin: 0;
+  color: rgb(72, 4, 4);
+  font-size: 22px;
+  font-weight: 600;
+}

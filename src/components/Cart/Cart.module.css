@@ -1,0 +1,46 @@
+.cartWrapper {
+  background-color: #6b3703;
+  padding: 30px 20px;
+  border-radius: 15px;
+  min-width: 283px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cartInner {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cartTitle {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.cartCount {
+  color: #ffffff;
+  margin: 0;
+  font-size: 16px;
+}
+
+.cartList {
+  margin: 0;
+  padding-left: 10px;
+}
+
+.cartItemList {
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.cartTotalPrice,
+.cartEmpty {
+  color: #ffffff;
+  font-size: 18px;
+  margin: 0;
+}

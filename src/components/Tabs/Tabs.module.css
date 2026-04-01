@@ -1,5 +1,6 @@
 .tabsHeader {
   display: flex;
+  gap: 12px;
 }
 
 .tabButton {
@@ -20,4 +21,15 @@
 
 .tabsContent {
   padding: 10px;
+}
+
+.contentInner {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.tabsDescription {
+  color: #817200;
+  font-size: 16px;
 }

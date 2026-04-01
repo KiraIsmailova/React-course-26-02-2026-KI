@@ -51,7 +51,7 @@ export const ReviewForm = () => {
   const { userName, reviewText, mark } = form;
 
   return (
-    <form onSubmit={(e) => e.preventDefault()} className={styles['reviewForm']}>
+    <form onSubmit={(e) => e.preventDefault()} className={styles.reviewForm}>
       <label htmlFor="userName">Имя</label>
       <input
         id="userName"

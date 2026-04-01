@@ -1,0 +1,36 @@
+.dishWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.dishItemInner {
+  display: flex;
+}
+
+.dishPrice {
+  color: #a30909;
+}
+
+.dishCompound {
+  color: #03b803;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.dishItem {
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.dishCompoundTitle {
+  font-size: 20px;
+  color: #008000;
+  margin-bottom: 10px;
+}
+
+.dishDetailDescription {
+  min-width: 350px;
+}
