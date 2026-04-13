@@ -25,10 +25,6 @@ export const RestaurantPage = () => {
     return <div>loading...</div>;
   }
 
-  // if (!restaurants || restaurants.length === 0) {
-  //   return <div>Рестораны не найдены</div>;
-  // }
-
   return (
     <div className={styles.tabsContainer}>
       <div className={styles.tabsHeader}>

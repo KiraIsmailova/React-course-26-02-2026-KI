@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { selectRestaurantIds } from './slice';
+//import { selectRestaurantIds } from './slice';
 
 export const getRestaurants = createAsyncThunk(
   'restaurants/getRestaurants',
-  async (_, { getState, rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     const response = await fetch('http://localhost:3001/api/restaurants');
 
     const result = await response.json();

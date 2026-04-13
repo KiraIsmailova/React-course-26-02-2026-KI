@@ -1,17 +1,27 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate, useParams } from 'react-router';
 import { selectRestaurantById } from '../redux/entities/restaurants/slice';
 import styles from './RestaurantsDetailPage.module.css';
 import { Button } from '../components/Button/Button';
 import { Cart } from '../components/Cart/Cart';
+import { selectRequestStatus } from '../redux/entities/dishes/slice';
+import { useEffect } from 'react';
+import { getDishes } from '../redux/entities/dishes/get-dishes';
 
 export const RestaurantsDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const restaurant = useSelector((state) => selectRestaurantById(state, id));
+  const dispatch = useDispatch();
 
-  if (!restaurant) {
-    return <div>Ресторан не найден</div>;
+  const restaurant = useSelector((state) => selectRestaurantById(state, id));
+  const requestStatus = useSelector(selectRequestStatus);
+
+  useEffect(() => {
+    dispatch(getDishes(id));
+  }, [dispatch, id]);
+
+  if (requestStatus === 'idle' || requestStatus === 'pending') {
+    return <div>loading...</div>;
   }
 
   return (
