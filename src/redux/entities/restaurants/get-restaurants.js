@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-//import { selectRestaurantIds } from './slice';
+import { selectRestaurantIds } from './slice';
 
 export const getRestaurants = createAsyncThunk(
   'restaurants/getRestaurants',
@@ -13,10 +13,15 @@ export const getRestaurants = createAsyncThunk(
     }
 
     return result;
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState();
+      const existingIds = selectRestaurantIds(state);
+
+      if (existingIds && existingIds.length > 0) {
+        return false;
+      }
+    },
   }
-  // {
-  //   condition: (_, { getState }) => {
-  //     return selectRestaurantIds(getState().length === 0);
-  //   },
-  // }
 );

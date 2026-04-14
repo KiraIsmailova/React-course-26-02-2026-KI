@@ -1,6 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { getDishes } from './get-dishes';
-//import { normalizedDishes } from '../../../constants/normalized-mock';
 
 const initialState = {
   requestStatus: 'idle',

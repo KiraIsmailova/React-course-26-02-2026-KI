@@ -4,9 +4,8 @@ import { selectRestaurantById } from '../redux/entities/restaurants/slice';
 import styles from './RestaurantsDetailPage.module.css';
 import { Button } from '../components/Button/Button';
 import { Cart } from '../components/Cart/Cart';
-import { selectRequestStatus } from '../redux/entities/dishes/slice';
 import { useEffect } from 'react';
-import { getDishes } from '../redux/entities/dishes/get-dishes';
+import { getRestaurants } from '../redux/entities/restaurants/get-restaurants';
 
 export const RestaurantsDetailPage = () => {
   const { id } = useParams();
@@ -14,20 +13,15 @@ export const RestaurantsDetailPage = () => {
   const dispatch = useDispatch();
 
   const restaurant = useSelector((state) => selectRestaurantById(state, id));
-  const requestStatus = useSelector(selectRequestStatus);
 
   useEffect(() => {
-    dispatch(getDishes(id));
-  }, [dispatch, id]);
-
-  if (requestStatus === 'idle' || requestStatus === 'pending') {
-    return <div>loading...</div>;
-  }
+    dispatch(getRestaurants());
+  }, [dispatch]);
 
   return (
     <div>
       <Button onClick={() => navigate('/restaurants')}>Назад к списку</Button>
-      <h2>{restaurant.name}</h2>
+      <h2>{restaurant?.name}</h2>
       <Button
         style={{ marginRight: '10px' }}
         onClick={() => navigate(`/restaurants/${id}/menu`)}

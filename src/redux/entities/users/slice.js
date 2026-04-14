@@ -1,18 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { normalizedUsers } from '../../../constants/normalized-mock';
+import { getUsers } from './get-users';
 
 const initialState = {
-  entities: normalizedUsers.reduce((acc, user) => {
-    acc[user.id] = user;
-
-    return acc;
-  }, {}),
-  ids: normalizedUsers.map(({ id }) => id),
+  requestStatus: 'idle',
+  ids: [],
+  entities: {},
 };
 
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
+  extraReducers: (builder) =>
+    builder
+      .addCase(getUsers.pending, (state) => {
+        state.requestStatus = 'pending';
+      })
+      .addCase(getUsers.fulfilled, (state, { payload }) => {
+        state.ids = payload.map(({ id }) => id);
+        ((state.entities = payload.reduce((acc, restaurant) => {
+          acc[restaurant.id] = restaurant;
+
+          return acc;
+        }, {})),
+          (state.requestStatus = 'fulfilled'));
+      })
+      .addCase(getUsers.rejected, (state) => {
+        state.requestStatus = 'rejected';
+      }),
 });
 
 export const selectUsersSlice = (state) => state[usersSlice.name];
@@ -25,3 +39,6 @@ export const selectUsersById = (state, userId) => {
 
   return slice.entities[userId];
 };
+export const selectUsersIds = (state) => selectUsersSlice(state).ids;
+export const selectRequestUsersStatus = (state) =>
+  selectUsersSlice(state).requestStatus;

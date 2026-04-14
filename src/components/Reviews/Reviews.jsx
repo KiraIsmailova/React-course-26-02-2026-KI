@@ -1,6 +1,9 @@
 import { useSelector } from 'react-redux';
 import { selectReviewById } from '../../redux/reviews/slice';
-import { selectUsersById } from '../../redux/entities/users/slice';
+import {
+  selectRequestUsersStatus,
+  selectUsersById,
+} from '../../redux/entities/users/slice';
 import styles from './Reviews.module.css';
 
 export const Reviews = ({ reviewId }) => {
@@ -8,9 +11,10 @@ export const Reviews = ({ reviewId }) => {
   const user = useSelector((state) =>
     review?.userId ? selectUsersById(state, review.userId) : null
   );
+  const requestStatus = useSelector(selectRequestUsersStatus);
 
-  if (!review) {
-    return <p>Отзывы скоро появятся</p>;
+  if (requestStatus === 'idle' || requestStatus === 'pending') {
+    return <div>loading</div>;
   }
 
   return (
