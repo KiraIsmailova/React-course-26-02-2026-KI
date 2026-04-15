@@ -5,7 +5,7 @@ import styles from './RestaurantsDetailPage.module.css';
 import { Button } from '../components/Button/Button';
 import { Cart } from '../components/Cart/Cart';
 import { useEffect } from 'react';
-import { getRestaurants } from '../redux/entities/restaurants/get-restaurants';
+import { getRestaurantById } from '../redux/entities/restaurants/get-restaurants';
 
 export const RestaurantsDetailPage = () => {
   const { id } = useParams();
@@ -15,8 +15,10 @@ export const RestaurantsDetailPage = () => {
   const restaurant = useSelector((state) => selectRestaurantById(state, id));
 
   useEffect(() => {
-    dispatch(getRestaurants());
-  }, [dispatch]);
+    if (id) {
+      dispatch(getRestaurantById(id));
+    }
+  }, [dispatch, id]);
 
   return (
     <div>

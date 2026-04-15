@@ -25,3 +25,20 @@ export const getRestaurants = createAsyncThunk(
     },
   }
 );
+
+export const getRestaurantById = createAsyncThunk(
+  'restaurants/getRestaurantById',
+  async (restaurantId, { rejectWithValue }) => {
+    const response = await fetch(
+      `http://localhost:3001/api/restaurant/${restaurantId}`
+    );
+
+    const result = await response.json();
+
+    if (!result || Object.keys(result).length === 0) {
+      return rejectWithValue('Restaurant not found');
+    }
+
+    return result;
+  }
+);

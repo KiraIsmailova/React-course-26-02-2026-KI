@@ -3,12 +3,12 @@
 ## Ресторан
 
 1. GET /api/restaurants/ - все рестораны; +
-2. GET /api/restaurant/:restaurantId - ресторан по айдишки (/api/restaurant/d32n32d8huasj );
+2. GET /api/restaurant/:restaurantId - ресторан по айдишки (/api/restaurant/d32n32d8huasj ); +
 
 ## Блюда
 
 1. GET /api/dishes?restaurantId=:restaurantId - получить блюда по айди ресторана (/api/dishes?restaurantId=d32n32d8huasj) +
-2. GET /api/dish/:dishId - блюдо по айдишки (/api/dish/djshfusdhfi29 )
+2. GET /api/dish/:dishId - блюдо по айдишки (/api/dish/djshfusdhfi29 ) +
 
 ## Отзывы
 

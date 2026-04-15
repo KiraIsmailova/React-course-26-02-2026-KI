@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { getRestaurants } from './get-restaurants';
+import { getRestaurantById, getRestaurants } from './get-restaurants';
 
 const initialState = {
   requestStatus: 'idle',
@@ -25,6 +25,20 @@ export const restaurantsSlice = createSlice({
           (state.requestStatus = 'fulfilled'));
       })
       .addCase(getRestaurants.rejected, (state) => {
+        state.requestStatus = 'rejected';
+      })
+
+      .addCase(getRestaurantById.pending, (state) => {
+        state.requestStatus = 'pending';
+      })
+      .addCase(getRestaurantById.fulfilled, (state, { payload }) => {
+        const restaurant = payload;
+
+        state.entities[restaurant.id] = restaurant;
+
+        state.requestStatus = 'fulfilled';
+      })
+      .addCase(getRestaurantById.rejected, (state) => {
         state.requestStatus = 'rejected';
       }),
 });

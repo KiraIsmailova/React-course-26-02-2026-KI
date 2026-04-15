@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { getDishes } from './get-dishes';
+import { getDishById, getDishes } from './get-dishes';
 
 const initialState = {
   requestStatus: 'idle',
@@ -26,6 +26,20 @@ export const dishesSlice = createSlice({
       })
       .addCase(getDishes.rejected, (state) => {
         state.requestStatus = 'rejected';
+      })
+
+      .addCase(getDishById.pending, (state) => {
+        state.requestStatus = 'pending';
+      })
+      .addCase(getDishById.fulfilled, (state, { payload }) => {
+        const dish = payload;
+
+        state.entities[dish.id] = dish;
+
+        state.requestStatus = 'fulfilled';
+      })
+      .addCase(getDishById.rejected, (state) => {
+        state.requestStatus = 'rejected';
       }),
 });
 
@@ -35,5 +49,6 @@ export const selectDishesById = (state, dishId) =>
 export const selectAllDishes = createSelector([selectDishesSlice], (slice) => {
   return slice.ids.map((id) => slice.entities[id]);
 });
+export const selectDishIds = (state) => selectDishesSlice(state).ids;
 export const selectRequestStatus = (state) =>
   selectDishesSlice(state).requestStatus;
