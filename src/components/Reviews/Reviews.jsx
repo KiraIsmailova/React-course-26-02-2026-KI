@@ -5,6 +5,11 @@ import {
   selectUsersById,
 } from '../../redux/entities/users/slice';
 import styles from './Reviews.module.css';
+import {
+  idleStatus,
+  lodaingStatus,
+  rejectedStatus,
+} from '../../constants/statusLoad';
 
 export const Reviews = ({ reviewId }) => {
   const review = useSelector((state) => selectReviewById(state, reviewId));
@@ -13,14 +18,20 @@ export const Reviews = ({ reviewId }) => {
   );
   const requestStatus = useSelector(selectRequestUsersStatus);
 
-  if (requestStatus === 'idle' || requestStatus === 'pending') {
-    return <div>loading</div>;
+  if (requestStatus === idleStatus || requestStatus === lodaingStatus) {
+    return <div className="status">Загружаем отзывы</div>;
+  }
+
+  if (requestStatus === rejectedStatus) {
+    return (
+      <div className="status">Упс! Произошла ошибка получения отзывов...</div>
+    );
   }
 
   return (
     <div>
       <div className={styles.reviewsUser}>
-        <li key={reviewId}>{user?.name}</li>
+        <li key={reviewId}>{user?.name || 'Anonim'}</li>
       </div>
       <p className={styles.reviewsUserText}>{review.text}</p>
       <p className={styles.reviewsUserMark}>{review.rating}</p>

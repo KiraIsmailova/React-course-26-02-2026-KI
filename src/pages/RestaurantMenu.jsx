@@ -5,22 +5,31 @@ import { getDishes } from '../redux/entities/dishes/get-dishes';
 import { useEffect } from 'react';
 import {
   selectAllDishes,
-  selectRequestStatus,
+  selectRequestDishesStatus,
 } from '../redux/entities/dishes/slice';
+import {
+  idleStatus,
+  lodaingStatus,
+  rejectedStatus,
+} from '../constants/statusLoad';
 
 export const RestaurantMenu = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const dishes = useSelector(selectAllDishes);
-  const requestStatus = useSelector(selectRequestStatus);
+  const requestStatus = useSelector(selectRequestDishesStatus);
 
   useEffect(() => {
     dispatch(getDishes(id));
   }, [dispatch, id]);
 
-  if (requestStatus === 'idle' || requestStatus === 'pending') {
-    return <div>loading...</div>;
+  if (requestStatus === idleStatus || requestStatus === lodaingStatus) {
+    return <div className="status">Загружаем меню...</div>;
+  }
+
+  if (requestStatus === rejectedStatus) {
+    return <div className="status">Ошибка загрузки меню</div>;
   }
 
   return (

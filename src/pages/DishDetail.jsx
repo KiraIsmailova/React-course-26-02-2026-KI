@@ -2,12 +2,20 @@ import { useContext, useEffect } from 'react';
 import { AuthContext } from '../components/AuthContext/AuthContext';
 import styles from '../components/DishList/DishList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDishesById } from '../redux/entities/dishes/slice';
+import {
+  selectDishesById,
+  selectRequestDishesStatus,
+} from '../redux/entities/dishes/slice';
 import { DishCounter } from '../components/DishCounter/DishCounter';
 import { useNavigate, useParams } from 'react-router';
 import { Button } from '../components/Button/Button';
 import { Cart } from '../components/Cart/Cart';
 import { getDishById } from '../redux/entities/dishes/get-dishes';
+import {
+  idleStatus,
+  lodaingStatus,
+  rejectedStatus,
+} from '../constants/statusLoad';
 
 export const DishDetail = () => {
   const { dishId } = useParams();
@@ -20,6 +28,7 @@ export const DishDetail = () => {
   };
 
   const dish = useSelector((state) => selectDishesById(state, dishId));
+  const requestStatus = useSelector(selectRequestDishesStatus);
 
   useEffect(() => {
     if (dishId) {
@@ -27,8 +36,12 @@ export const DishDetail = () => {
     }
   }, [dispatch, dishId]);
 
-  if (!dish) {
+  if (requestStatus === idleStatus || requestStatus === lodaingStatus) {
     return <div>Загрузка блюда...</div>;
+  }
+
+  if (requestStatus === rejectedStatus) {
+    return <div>Ошибка загрузки блюд</div>;
   }
 
   return (

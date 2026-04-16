@@ -5,15 +5,23 @@ import { Reviews } from '../components/Reviews/Reviews';
 import { ReviewForm } from '../components/ReviewForm/ReviewForm';
 import { useEffect } from 'react';
 import { getReviews } from '../redux/reviews/get-reviews';
-import { selectAllReviews, selectRequestStatus } from '../redux/reviews/slice';
+import {
+  selectAllReviews,
+  selectRequestReviewStatus,
+} from '../redux/reviews/slice';
 import { getUsers } from '../redux/entities/users/get-users';
+import {
+  idleStatus,
+  lodaingStatus,
+  rejectedStatus,
+} from '../constants/statusLoad';
 
 export const RestaurantReview = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const review = useSelector(selectAllReviews);
-  const requestStatus = useSelector(selectRequestStatus);
+  const requestStatus = useSelector(selectRequestReviewStatus);
 
   useEffect(() => {
     dispatch(getReviews(id));
@@ -23,8 +31,12 @@ export const RestaurantReview = () => {
     dispatch(getUsers());
   }, [dispatch]);
 
-  if (requestStatus === 'idle' || requestStatus === 'pending') {
-    return <div>loading...</div>;
+  if (requestStatus === idleStatus || requestStatus === lodaingStatus) {
+    return <div className="status">Загружаем отзывы...</div>;
+  }
+
+  if (requestStatus === rejectedStatus) {
+    return <div className="status">Упс! Ошибка загрузки</div>;
   }
 
   return (
@@ -35,7 +47,7 @@ export const RestaurantReview = () => {
             {review?.map((review) => (
               <Reviews key={review.id} reviewId={review.id} />
             ))}
-            <ReviewForm key={`form-${id}`} />
+            <ReviewForm key={`form-${id}`} restaurantId={id} />
           </ul>
         </div>
       </div>

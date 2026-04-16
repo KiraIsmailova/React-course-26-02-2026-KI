@@ -1,42 +1,46 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { getReviews } from './get-reviews';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { addReview, getReviews } from './get-reviews';
 
-const initialState = {
+const reviewsAdapter = createEntityAdapter({});
+
+const initialState = reviewsAdapter.getInitialState({
   requestStatus: 'idle',
-  ids: [],
-  entities: {},
-};
+});
 
 export const reviewsSlice = createSlice({
   name: 'reviews',
   initialState,
+  reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(getReviews.pending, (state) => {
         state.requestStatus = 'pending';
       })
       .addCase(getReviews.fulfilled, (state, { payload }) => {
-        state.ids = payload.map(({ id }) => id);
-        ((state.entities = payload.reduce((acc, dish) => {
-          acc[dish.id] = dish;
-
-          return acc;
-        }, {})),
-          (state.requestStatus = 'fulfilled'));
+        reviewsAdapter.setAll(state, payload);
+        state.requestStatus = 'fulfilled';
       })
       .addCase(getReviews.rejected, (state) => {
         state.requestStatus = 'rejected';
+      })
+      .addCase(addReview.pending, (state) => {
+        state.requestStatus = 'pending';
+      })
+      .addCase(addReview.fulfilled, (state, { payload }) => {
+        state.entities[payload.id] = payload;
+        state.ids.push(payload.id);
+
+        state.requestStatus = 'fulfilled';
+      })
+      .addCase(addReview.rejected, (state) => {
+        state.status = 'rejected';
       }),
 });
 
-export const selectReviewsSlice = (state) => state[reviewsSlice.name];
-export const selectReviewById = (state, reviewId) =>
-  selectReviewsSlice(state).entities[reviewId];
-export const selectAllReviews = createSelector(
-  [selectReviewsSlice],
-  (slice) => {
-    return slice.ids.map((id) => slice.entities[id]);
-  }
+const { selectAll, selectById } = reviewsAdapter.getSelectors(
+  (state) => state[reviewsSlice.name]
 );
-export const selectRequestStatus = (state) =>
-  selectReviewsSlice(state).requestStatus;
+
+export const selectReviewById = selectById;
+export const selectAllReviews = selectAll;
+export const selectRequestReviewStatus = (state) => state.reviews.requestStatus;

@@ -1,28 +1,24 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { getDishById, getDishes } from './get-dishes';
 
-const initialState = {
+const dishesAdapter = createEntityAdapter({});
+
+const initialState = dishesAdapter.getInitialState({
   requestStatus: 'idle',
-  ids: [],
-  entities: {},
-};
+});
 
 export const dishesSlice = createSlice({
   name: 'dishes',
   initialState,
+  reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(getDishes.pending, (state) => {
         state.requestStatus = 'pending';
       })
       .addCase(getDishes.fulfilled, (state, { payload }) => {
-        state.ids = payload.map(({ id }) => id);
-        ((state.entities = payload.reduce((acc, dish) => {
-          acc[dish.id] = dish;
-
-          return acc;
-        }, {})),
-          (state.requestStatus = 'fulfilled'));
+        dishesAdapter.setAll(state, payload);
+        state.requestStatus = 'fulfilled';
       })
       .addCase(getDishes.rejected, (state) => {
         state.requestStatus = 'rejected';
@@ -32,9 +28,7 @@ export const dishesSlice = createSlice({
         state.requestStatus = 'pending';
       })
       .addCase(getDishById.fulfilled, (state, { payload }) => {
-        const dish = payload;
-
-        state.entities[dish.id] = dish;
+        state.entities[payload.id] = payload;
 
         state.requestStatus = 'fulfilled';
       })
@@ -43,12 +37,11 @@ export const dishesSlice = createSlice({
       }),
 });
 
-export const selectDishesSlice = (state) => state[dishesSlice.name];
-export const selectDishesById = (state, dishId) =>
-  selectDishesSlice(state).entities[dishId];
-export const selectAllDishes = createSelector([selectDishesSlice], (slice) => {
-  return slice.ids.map((id) => slice.entities[id]);
-});
-export const selectDishIds = (state) => selectDishesSlice(state).ids;
-export const selectRequestStatus = (state) =>
-  selectDishesSlice(state).requestStatus;
+const { selectAll, selectById, selectIds } = dishesAdapter.getSelectors(
+  (state) => state[dishesSlice.name]
+);
+
+export const selectDishesById = selectById;
+export const selectAllDishes = selectAll;
+export const selectDishIds = selectIds;
+export const selectRequestDishesStatus = (state) => state.dishes.requestStatus;

@@ -1,44 +1,34 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { getUsers } from './get-users';
 
-const initialState = {
+const userAdapter = createEntityAdapter({});
+
+const initialState = userAdapter.getInitialState({
   requestStatus: 'idle',
-  ids: [],
-  entities: {},
-};
+});
 
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
+  reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(getUsers.pending, (state) => {
         state.requestStatus = 'pending';
       })
       .addCase(getUsers.fulfilled, (state, { payload }) => {
-        state.ids = payload.map(({ id }) => id);
-        ((state.entities = payload.reduce((acc, restaurant) => {
-          acc[restaurant.id] = restaurant;
-
-          return acc;
-        }, {})),
-          (state.requestStatus = 'fulfilled'));
+        userAdapter.setAll(state, payload);
+        state.requestStatus = 'fulfilled';
       })
       .addCase(getUsers.rejected, (state) => {
         state.requestStatus = 'rejected';
       }),
 });
 
-export const selectUsersSlice = (state) => state[usersSlice.name];
-export const selectUsersById = (state, userId) => {
-  const slice = selectUsersSlice(state);
+const { selectById, selectIds } = userAdapter.getSelectors(
+  (state) => state[usersSlice.name]
+);
 
-  if (!slice || !slice.entities) {
-    return undefined;
-  }
-
-  return slice.entities[userId];
-};
-export const selectUsersIds = (state) => selectUsersSlice(state).ids;
-export const selectRequestUsersStatus = (state) =>
-  selectUsersSlice(state).requestStatus;
+export const selectUsersById = selectById;
+export const selectUsersIds = selectIds;
+export const selectRequestUsersStatus = (state) => state.users.requestStatus;
