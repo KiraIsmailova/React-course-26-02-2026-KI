@@ -1,29 +1,48 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { normalizedRestaurants } from '../../../constants/normalized-mock';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { getRestaurantById, getRestaurants } from './get-restaurants';
 
-const initialState = {
-  entities: normalizedRestaurants.reduce((acc, restaurant) => {
-    acc[restaurant.id] = restaurant;
+const restaurantAdapter = createEntityAdapter({});
 
-    return acc;
-  }, {}),
-  ids: normalizedRestaurants.map(({ id }) => id),
-};
+const initialState = restaurantAdapter.getInitialState({
+  requestStatus: 'idle',
+});
 
 export const restaurantsSlice = createSlice({
   name: 'restaurants',
   initialState,
+  reducers: {},
+  extraReducers: (builder) =>
+    builder
+      .addCase(getRestaurants.pending, (state) => {
+        state.requestStatus = 'pending';
+      })
+      .addCase(getRestaurants.fulfilled, (state, { payload }) => {
+        restaurantAdapter.setAll(state, payload);
+        state.requestStatus = 'fulfilled';
+      })
+      .addCase(getRestaurants.rejected, (state) => {
+        state.requestStatus = 'rejected';
+      })
+
+      .addCase(getRestaurantById.pending, (state) => {
+        state.requestStatus = 'pending';
+      })
+      .addCase(getRestaurantById.fulfilled, (state, { payload }) => {
+        state.entities[payload.id] = payload;
+
+        state.requestStatus = 'fulfilled';
+      })
+      .addCase(getRestaurantById.rejected, (state) => {
+        state.requestStatus = 'rejected';
+      }),
 });
 
-export const selectRestaurantsSlice = (state) => state[restaurantsSlice.name];
-export const selectRestaurantById = (state, restaurantId) =>
-  selectRestaurantsSlice(state).entities[restaurantId];
-
-export const selectRestaurantIds = (state) => selectRestaurantsSlice(state).ids;
-
-export const selectAllRestaurants = createSelector(
-  [selectRestaurantIds, selectRestaurantsSlice],
-  (ids, slice) => {
-    return ids.map((id) => slice.entities[id]);
-  }
+const { selectAll, selectById, selectIds } = restaurantAdapter.getSelectors(
+  (state) => state[restaurantsSlice.name]
 );
+
+export const selectRestaurantById = selectById;
+export const selectRestaurantIds = selectIds;
+export const selectAllRestaurants = selectAll;
+export const selectRequestRestaurantStatus = (state) =>
+  state.restaurants.requestStatus;

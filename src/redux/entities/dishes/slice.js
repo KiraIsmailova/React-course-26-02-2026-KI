@@ -1,23 +1,47 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { normalizedDishes } from '../../../constants/normalized-mock';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { getDishById, getDishes } from './get-dishes';
 
-const initialState = {
-  entities: normalizedDishes.reduce((acc, dish) => {
-    acc[dish.id] = dish;
+const dishesAdapter = createEntityAdapter({});
 
-    return acc;
-  }, {}),
-  ids: normalizedDishes.map(({ id }) => id),
-};
+const initialState = dishesAdapter.getInitialState({
+  requestStatus: 'idle',
+});
 
 export const dishesSlice = createSlice({
   name: 'dishes',
   initialState,
+  reducers: {},
+  extraReducers: (builder) =>
+    builder
+      .addCase(getDishes.pending, (state) => {
+        state.requestStatus = 'pending';
+      })
+      .addCase(getDishes.fulfilled, (state, { payload }) => {
+        dishesAdapter.setAll(state, payload);
+        state.requestStatus = 'fulfilled';
+      })
+      .addCase(getDishes.rejected, (state) => {
+        state.requestStatus = 'rejected';
+      })
+
+      .addCase(getDishById.pending, (state) => {
+        state.requestStatus = 'pending';
+      })
+      .addCase(getDishById.fulfilled, (state, { payload }) => {
+        state.entities[payload.id] = payload;
+
+        state.requestStatus = 'fulfilled';
+      })
+      .addCase(getDishById.rejected, (state) => {
+        state.requestStatus = 'rejected';
+      }),
 });
 
-export const selectDishesSlice = (state) => state[dishesSlice.name];
-export const selectDishesById = (state, dishId) =>
-  selectDishesSlice(state).entities[dishId];
-export const selectAllDishes = createSelector([selectDishesSlice], (slice) => {
-  return slice.ids.map((id) => slice.entities[id]);
-});
+const { selectAll, selectById, selectIds } = dishesAdapter.getSelectors(
+  (state) => state[dishesSlice.name]
+);
+
+export const selectDishesById = selectById;
+export const selectAllDishes = selectAll;
+export const selectDishIds = selectIds;
+export const selectRequestDishesStatus = (state) => state.dishes.requestStatus;

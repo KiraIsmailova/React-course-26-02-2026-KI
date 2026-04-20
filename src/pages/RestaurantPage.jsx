@@ -1,15 +1,37 @@
-import { useSelector } from 'react-redux';
-import { selectAllRestaurants } from '../redux/entities/restaurants/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectAllRestaurants,
+  selectRequestRestaurantStatus,
+} from '../redux/entities/restaurants/slice';
 import { useNavigate } from 'react-router';
 import styles from '../components/Tabs/Tabs.module.css';
 import { Button } from '../components/Button/Button';
+import { useEffect } from 'react';
+import { getRestaurants } from '../redux/entities/restaurants/get-restaurants';
+import {
+  idleStatus,
+  lodaingStatus,
+  rejectedStatus,
+} from '../constants/statusLoad';
 
 export const RestaurantPage = () => {
+  const dispatch = useDispatch();
+
   const restaurants = useSelector(selectAllRestaurants);
+  const requestStatus = useSelector(selectRequestRestaurantStatus);
+
   const navigate = useNavigate();
 
-  if (!restaurants || restaurants.length === 0) {
-    return <div>Рестораны не найдены</div>;
+  useEffect(() => {
+    dispatch(getRestaurants());
+  }, [dispatch]);
+
+  if (requestStatus === idleStatus || requestStatus === lodaingStatus) {
+    return <div>Загружаем данные...</div>;
+  }
+
+  if (requestStatus === rejectedStatus) {
+    return <div>Ошибка! Не удалось загрузить рестораны</div>;
   }
 
   return (
