@@ -61,7 +61,6 @@ export const DishDetail = () => {
         ))}
         {isAuthenticated && <DishCounter id={dishId} />}
       </div>
-      <Cart />
     </div>
   );
 };

@@ -58,7 +58,6 @@ export const RestaurantsDetailPage = () => {
         <div className={styles.detailContent}>
           <Outlet />
         </div>
-        <Cart />
       </div>
     </div>
   );
